@@ -15,6 +15,9 @@ var modal = document.getElementById("addContactModal");
 var contacts = JSON.parse(localStorage.getItem("contacts")) || [];
 var FavList = JSON.parse(localStorage.getItem("FavList")) || [];
 var EmeList = JSON.parse(localStorage.getItem("EmeList")) || [];
+var AddBtn = document.getElementById("addContactBtn");
+var UpdateBtn = document.getElementById("updateContactBtn");
+var currentIndex;
 DisplayContacts();
 
 
@@ -31,10 +34,32 @@ function getBase64(file, callback) {
 function AddContact() {
   const file = avatar.files[0];
 
+  if (file) {
+    getBase64(file, function (result) {
+      var Contact = {
+        avatar: result,
+        fullname: fullname.value,
+        phone: phone.value,
+        email: email.value,
+        group: group.value,
+        address: address.value,
+        notes: notes.value,
+        fav: fav.checked,
+        eme: eme.checked,
+      };
 
-  getBase64(file, function (result) {
+      contacts.push(Contact);
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+      DisplayContacts();
+
+      var modalInstance = bootstrap.Modal.getInstance(modal);
+      if (modalInstance) modalInstance.hide();
+
+      ClearForm();
+    });
+  } else {
     var Contact = {
-      avatar: result,
+      avatar: "",
       fullname: fullname.value,
       phone: phone.value,
       email: email.value,
@@ -53,7 +78,7 @@ function AddContact() {
     if (modalInstance) modalInstance.hide();
 
     ClearForm();
-  });
+  }
 }
 
 
@@ -216,7 +241,7 @@ function DisplayContacts() {
                                                 </a>
                                             </div>
                                             <div class="f-control d-flex align-items-center gap-1">
-                                                <div onclick="favTgl(${i})"
+                                                <div onclick="favtogle(${i})"
                                                     class="${contacts[i].fav
                 ? "f-control-fav-clk"
                 : "f-control-fav"
@@ -226,7 +251,7 @@ function DisplayContacts() {
                 : "-regular"
             } fa-star"></i>
                                                 </div>
-                                                <div onclick="emTgl(${i})"
+                                                <div onclick="emetogle(${i})"
                                                     class="${contacts[i].eme
                 ? "f-control-em-clk"
                 : "f-control-em"
@@ -240,7 +265,7 @@ function DisplayContacts() {
                                                 </div>
                                                 <div class="f-control-update d-flex align-items-center justify-content-center"
                                                     data-bs-toggle="modal" data-bs-target="#addContactModal"
-                                                    onclick="setUpdateInfo(${i})">
+                                                    onclick="GetData(${i})">
 
                                                     <i class="fa fa-pen"></i>
                                                 </div>
@@ -264,6 +289,63 @@ function DisplayContacts() {
     document.getElementById("totall").innerHTML = contacts.length;
     document.getElementById("fav").innerHTML = FavCount;
     document.getElementById("eme").innerHTML = EmeCount;
+}
+
+
+function deleteContact(i) {
+    contacts.splice(i, 1);
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+    DisplayContacts();
+
+}
+
+
+function GetData(i){
+
+    currentIndex = i;
+    fullname.value = contacts[i].fullname;
+    phone.value = contacts[i].phone;
+    email.value = contacts[i].email;
+    address.value = contacts[i].address;
+    group.value = contacts[i].group;
+    notes.value = contacts[i].notes;
+    fav.checked = contacts[i].fav;
+    eme.checked = contacts[i].eme;
+    AddBtn.classList.add("d-none");
+    UpdateBtn.classList.remove("d-none");
+    
+}
+
+function UpdateContact(){
+    contacts[currentIndex].fullname = fullname.value;
+    contacts[currentIndex].phone = phone.value;
+    contacts[currentIndex].email = email.value;
+    contacts[currentIndex].address = address.value;
+    contacts[currentIndex].group = group.value;
+    contacts[currentIndex].notes = notes.value;
+    contacts[currentIndex].fav = fav.checked;
+    contacts[currentIndex].eme = eme.checked;
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+    DisplayContacts();
+    var modalInstance = bootstrap.Modal.getInstance(modal);
+    if (modalInstance) {modalInstance.hide();}
+    ClearForm();
+    AddBtn.classList.remove("d-none");
+    UpdateBtn.classList.add("d-none");
+}
+
+
+
+
+function favtogle(i) {
+    contacts[i].fav = !contacts[i].fav;
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+    DisplayContacts();
+}
+function emetogle(i) {
+    contacts[i].eme = !contacts[i].eme;
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+    DisplayContacts();
 }
 
 function ClearForm() {
