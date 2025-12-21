@@ -1,0 +1,41 @@
+@media (min-width: 576px) { 
+    nav{
+        height: 5rem;
+    } 
+    nav .logo .icon{
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+    nav h1{
+        font-size: var(--text-2xl);
+    }
+    nav p{
+        font-size: var(--text-xs);
+    }
+    nav .btn-add-contact{
+        padding: 0.625rem 1.25rem;
+    }
+    nav .header__user-avatar{
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    section .statistics-grid .stat-card{
+        padding: 1.25rem;
+    }
+    section .quick-stats .icon{
+        width: 3rem;
+        height: 3rem;
+        font-size: var(--text-base);
+    }
+    section .quick-stats .quick-stats-text p:first-child{
+        font-size: var(--text-xs);
+    }
+    section .quick-stats .quick-stats-text p:last-child{
+        font-size: var(--text-2xl);
+    }
+    section .all-contact .header h2{
+        font-size: var(--text-3xl);
+    }
+
+}
