@@ -43,6 +43,12 @@ function Icon(fullName) {
     return first_letter.toUpperCase();
 }
 
+function DisplayAvatar() {
+    var imageUrl = URL.createObjectURL(avatar.files[0]);
+    if (avatar.files[0]) {
+        avatarPreview.innerHTML = `<img src="${imageUrl}" class="w-100 h-100 object-fit-cover rounded-circle" alt="Avatar Preview">`;
+    }
+}
 function DisplayContacts() {
     var contact = "";
     var favContact = "";
