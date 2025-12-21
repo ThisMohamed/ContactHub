@@ -261,18 +261,21 @@ function DisplayContacts() {
     favListGroup.innerHTML = favContact == "" ? favEmpty : favContact;
     emeListGroup.innerHTML = emeContact == "" ? emeEmpty : emeContact;
     document.getElementById("total").innerHTML = contacts.length;
+    document.getElementById("totall").innerHTML = contacts.length;
     document.getElementById("fav").innerHTML = FavCount;
     document.getElementById("eme").innerHTML = EmeCount;
 }
 
 function ClearForm() {
-    avatarInput.value = "";
-    fNameInput.value = "";
-    phoneInput.value = "";
-    emailInput.value = "";
-    addressInput.value = "";
-    contactGroupInput.value = "";
-    contactNotesInput.value = "";
-    favCheck.checked = false;
-    emCheck.checked = false;
+    avatar.value = "";
+    fullname.value = "";
+    phone.value = "";
+    email.value = "";
+    address.value = "";
+    group.value = "";
+    notes.value = "";
+    fav.checked = false;
+    eme.checked = false;
+    avatarPreview.innerHTML = `<i class="fa-solid fa-user"></i>`;
 }
+
