@@ -17,25 +17,45 @@ var FavList = JSON.parse(localStorage.getItem("FavList")) || [];
 var EmeList = JSON.parse(localStorage.getItem("EmeList")) || [];
 DisplayContacts();
 
+
+function getBase64(file, callback) {
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    callback(reader.result);
+  };
+
+  reader.readAsDataURL(file);
+}
+
 function AddContact() {
+  const file = avatar.files[0];
+
+
+  getBase64(file, function (result) {
     var Contact = {
-        avatar: URL.createObjectURL(avatar.files[0]) ,
-        fullname: fullname.value,
-        phone: phone.value,
-        email: email.value,
-        group: group.value,
-        address: address.value,
-        notes: notes.value,
-        fav: fav.checked,
-        eme: eme.checked,
+      avatar: result,
+      fullname: fullname.value,
+      phone: phone.value,
+      email: email.value,
+      group: group.value,
+      address: address.value,
+      notes: notes.value,
+      fav: fav.checked,
+      eme: eme.checked,
     };
+
     contacts.push(Contact);
     localStorage.setItem("contacts", JSON.stringify(contacts));
     DisplayContacts();
+
     var modalInstance = bootstrap.Modal.getInstance(modal);
     if (modalInstance) modalInstance.hide();
+
     ClearForm();
+  });
 }
+
 
 function Icon(fullName) {
     var names = fullName.split(" ");
@@ -44,9 +64,10 @@ function Icon(fullName) {
 }
 
 function DisplayAvatar() {
-    var imageUrl = URL.createObjectURL(avatar.files[0]);
     if (avatar.files[0]) {
-        avatarPreview.innerHTML = `<img src="${imageUrl}" class="w-100 h-100 object-fit-cover rounded-circle" alt="Avatar Preview">`;
+        getBase64(avatar.files[0], function(result) {
+            avatarPreview.innerHTML = `<img src="${result}" class="w-100 h-100 object-fit-cover rounded-circle" alt="Avatar Preview">`;
+        });
     }
 }
 function DisplayContacts() {
@@ -135,38 +156,28 @@ function DisplayContacts() {
                                                         class="section-icon d-flex align-items-center justify-content-center text-white fw-semibold">
                                                         ${contacts[i].avatar
                 ? `<img class="section-icon object-fit-cover" src="${contacts[i].avatar}" alt="">`
-                : Icon(
-                    contacts[i]
-                        .fullname
-                )
+                : Icon(contacts[i].fullname)
             }</div>
                                                     <div
-                                                        class="em-icon position-absolute rounded-circle d-flex align-items-center justify-content-center ${contacts[i].eme
-                ? ""
-                : "d-none"
+                                                        class="em-icon position-absolute rounded-circle d-flex align-items-center justify-content-center ${contacts[i].eme? "": "d-none"
             }">
                                                         <i class="fa-solid fa-heart-pulse text-white"></i>
                                                     </div>
 
                                                     <div
-                                                        class="fav-icon position-absolute rounded-circle d-flex align-items-center justify-content-center ${contacts[i].fav
-                ? ""
-                : "d-none"
-            }">
+                                                        class="fav-icon position-absolute rounded-circle d-flex align-items-center justify-content-center ${contacts[i].fav? "": "d-none"}">
                                                         <i class="fa-solid fa-star text-white"></i>
                                                     </div>
                                                 </div>
                                                 <div>
                                                     <h3 class="fw-semibold text-gray-900 text-base  m-0">
-                                                        ${contacts[i].fullname
-            }</h3>
+                                                        ${contacts[i].fullname}</h3>
                                                     <div class="contact-phone d-flex align-items-center gap-2 mt-1">
                                                         <div
                                                             class="icon bg-blue-100 d-flex align-items-center justify-content-center flex-shrink-0">
                                                             <i class="fa fa-phone"></i>
                                                         </div>
-                                                        <span >${contacts[i].phone
-            }</span>
+                                                        <span >${contacts[i].phone}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,37 +186,26 @@ function DisplayContacts() {
                                                     class="icon bg-blue-100 d-flex align-items-center justify-content-center flex-shrink-0">
                                                     <i class="fa fa-envelope"></i>
                                                 </div>
-                                                <span class="">${contacts[i].email
-            }</span>
+                                                <span class="">${contacts[i].email}</span>
                                             </div>
                                             <div class="contact-address d-flex align-items-center gap-2 mt-1">
                                                 <div
                                                     class="icon bg-blue-100 d-flex align-items-center justify-content-center flex-shrink-0">
                                                     <i class="fa fa-location-dot"></i>
                                                 </div>
-                                                <span >${contacts[i].address
-            }</span>
+                                                <span >${contacts[i].address}</span>
                                             </div>
                                             <div class="d-flex flex-wrap gap-2 mt-2">
                                                 <span
-                                                    class="${contacts[i].group == ""
-                ? "d-none"
-                : " "
-            } card-badge ${contacts[i].group
-            }-badge d-inline-flex align-items-center fw-medium">${contacts[i].group
-            }</span>
+                                                    class="${contacts[i].group == ""? "d-none": " "} card-badge ${contacts[i].group}-badge d-inline-flex align-items-center fw-medium">${contacts[i].group }</span>
                                                 <span
-                                                    class="card-badge em-badge d-inline-flex align-items-center fw-medium ${contacts[i].emCheck
-                ? ""
-                : "d-none"
-            }"><i
+                                                    class="card-badge em-badge d-inline-flex align-items-center fw-medium ${contacts[i].emCheck? "": "d-none"}"><i
                                                         class="fa-solid fa-heart-pulse me-1"></i>emergency</span>
                                             </div>
                                         </div>
                                         <div class="card-footer d-flex align-items-center justify-content-between">
                                             <div class="f-contact d-flex align-items-center gap-1">
-                                                <a href="tel:${contacts[i].phone
-            }" title="Call"
+                                                <a href="tel:${contacts[i].phone}" title="Call"
                                                     class="f-contact-phone d-flex align-items-center justify-content-center">
                                                     <i class="fa fa-phone"></i>
                                                 </a>
