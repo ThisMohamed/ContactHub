@@ -22,13 +22,13 @@ DisplayContacts();
 
 
 function getBase64(file, callback) {
-  const reader = new FileReader();
+    const reader = new FileReader();
 
-  reader.onload = function () {
+    reader.onload = function () {
     callback(reader.result);
-  };
+    };
 
-  reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
 }
 
 function AddContact() {
@@ -356,7 +356,7 @@ function GetData(i){
 }
 
 function UpdateContact(){
-    contacts[currentIndex].avatar = avatarPreview.querySelector("img").src
+    contacts[currentIndex].avatar = avatarPreview.querySelector("img") ? avatarPreview.querySelector("img").src : contacts[currentIndex].avatar ;
     contacts[currentIndex].fullname = fullname.value;
     contacts[currentIndex].phone = phone.value;
     contacts[currentIndex].email = email.value;
@@ -419,7 +419,6 @@ function ValidateContactInput(element) {
         
     }
     else {
-        console.log("element.nextElementSibling:", element.nextElementSibling);
         element.nextElementSibling.classList.remove("d-none");
         element.classList.remove("is-valid");
         element.classList.add("is-invalid");
