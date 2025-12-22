@@ -475,6 +475,10 @@ function ClearForm() {
     fav.checked = false;
     eme.checked = false;
     avatarPreview.innerHTML = `<i class="fa-solid fa-user"></i>`;
+        fullname.classList.remove("is-valid", "is-invalid");
+    phone.classList.remove("is-valid", "is-invalid");
+    fullname.nextElementSibling.classList.add("d-none");
+    phone.nextElementSibling.classList.add("d-none");
 }
 
 
