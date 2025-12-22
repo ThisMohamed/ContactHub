@@ -32,11 +32,11 @@ function getBase64(file, callback) {
 }
 
 function AddContact() {
-  const file = avatar.files[0];
+    const file = avatar.files[0];
 
-  if (file) {
+    if (file) {
     getBase64(file, function (result) {
-      var Contact = {
+    var Contact = {
         avatar: result,
         fullname: fullname.value,
         phone: phone.value,
@@ -46,28 +46,27 @@ function AddContact() {
         notes: notes.value,
         fav: fav.checked,
         eme: eme.checked,
-      };
+    };
 
-      contacts.push(Contact);
-      localStorage.setItem("contacts", JSON.stringify(contacts));
-      DisplayContacts();
+    contacts.push(Contact);
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+    DisplayContacts();
 
-      var modalInstance = bootstrap.Modal.getInstance(modal);
-      if (modalInstance) modalInstance.hide();
-
-      ClearForm();
+    var modalInstance = bootstrap.Modal.getInstance(modal);
+    if (modalInstance) modalInstance.hide();
+        ClearForm();
     });
-  } else {
+    } else {
     var Contact = {
-      avatar: "",
-      fullname: fullname.value,
-      phone: phone.value,
-      email: email.value,
-      group: group.value,
-      address: address.value,
-      notes: notes.value,
-      fav: fav.checked,
-      eme: eme.checked,
+        avatar: "",
+        fullname: fullname.value,
+        phone: phone.value,
+        email: email.value,
+        group: group.value,
+        address: address.value,
+        notes: notes.value,
+        fav: fav.checked,
+        eme: eme.checked,
     };
 
     contacts.push(Contact);
@@ -78,7 +77,7 @@ function AddContact() {
     if (modalInstance) modalInstance.hide();
 
     ClearForm();
-  }
+    }
 }
 
 
