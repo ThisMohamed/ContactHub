@@ -390,22 +390,62 @@ function GetData(i){
 }
 
 function UpdateContact(){
-    contacts[currentIndex].avatar = avatarPreview.querySelector("img") ? avatarPreview.querySelector("img").src : contacts[currentIndex].avatar ;
-    contacts[currentIndex].fullname = fullname.value;
-    contacts[currentIndex].phone = phone.value;
-    contacts[currentIndex].email = email.value;
-    contacts[currentIndex].address = address.value;
-    contacts[currentIndex].group = group.value;
-    contacts[currentIndex].notes = notes.value;
-    contacts[currentIndex].fav = fav.checked;
-    contacts[currentIndex].eme = eme.checked;
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-    DisplayContacts();
-    var modalInstance = bootstrap.Modal.getInstance(modal);
-    if (modalInstance) {modalInstance.hide();}
-    ClearForm();
-    AddBtn.classList.remove("d-none");
-    UpdateBtn.classList.add("d-none");
+    if (ValidateContactInput(fullname) && ValidateContactInput(phone)) {
+        contacts[currentIndex].avatar = avatarPreview.querySelector("img") ? avatarPreview.querySelector("img").src : contacts[currentIndex].avatar ;
+        contacts[currentIndex].fullname = fullname.value;
+        contacts[currentIndex].phone = phone.value;
+        contacts[currentIndex].email = email.value;
+        contacts[currentIndex].address = address.value;
+        contacts[currentIndex].group = group.value;
+        contacts[currentIndex].notes = notes.value;
+        contacts[currentIndex].fav = fav.checked;
+        contacts[currentIndex].eme = eme.checked;
+        localStorage.setItem("contacts", JSON.stringify(contacts));
+        Swal.fire({
+            title: "Updated!",
+            text: "Contact has been updated successfully.",
+            icon: "success",
+            draggable: true
+        });
+        DisplayContacts();
+        var modalInstance = bootstrap.Modal.getInstance(modal);
+        if (modalInstance) {modalInstance.hide();}
+        ClearForm();
+        AddBtn.classList.remove("d-none");
+        UpdateBtn.classList.add("d-none");
+    } else if (!ValidateContactInput(fullname)) {
+        if (fullname.value == "") {
+            Swal.fire({
+                title: "Missing Name!",
+                text: "Please enter a name for the contact!",
+                icon: "error",
+                draggable: true
+            });
+        } else {
+            Swal.fire({
+                title: "Invalid Name!",
+                text: "Name should contain only letters and spaces (2-50 characters)",
+                icon: "error",
+                draggable: true
+            });
+        }
+    } else if (!ValidateContactInput(phone)) {
+        if (phone.value == "") {
+            Swal.fire({
+                title: "Missing Phone Number!",
+                text: "Please enter a phone number!",
+                icon: "error",
+                draggable: true
+            });
+        } else {
+            Swal.fire({
+                title: "Invalid Phone Number!",
+                text: "Please enter a valid Egyptian phone number (e.g., 01012345678 or +201012345678)",
+                icon: "error",
+                draggable: true
+            });
+        }
+    }
 }
 
 
