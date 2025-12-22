@@ -146,7 +146,7 @@ function AddContact() {
     else {
         Swal.fire({
             title: "Invalid Phone Number!",
-            text: "Please enter a valid Egyptian phone number (e.g., 01012345678 or +201012345678)",
+            text: "Please enter a valid Egyptian phone number (e.g., 01012345678, +201012345678, or 00201012345678)",
             icon: "error",
             draggable: true
         });
@@ -487,7 +487,7 @@ function UpdateContact(){
         } else {
             Swal.fire({
                 title: "Invalid Phone Number!",
-                text: "Please enter a valid Egyptian phone number (e.g., 01012345678 , +201012345678 or 00201012345678)",
+                text: "Please enter a valid Egyptian phone number (e.g., 01012345678, +201012345678, or 00201012345678)",
                 icon: "error",
                 draggable: true
             });
