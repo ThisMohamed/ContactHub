@@ -34,6 +34,28 @@ function getBase64(file, callback) {
 
 function AddContact() {
     if (ValidateContactInput(fullname) && ValidateContactInput(phone) ) {
+        
+        const duplicateCheck = checkDuplicate(phone.value, email.value);
+        
+        if (duplicateCheck.phoneDuplicate) {
+            Swal.fire({
+                title: "Duplicate Phone Number",
+                text: `A contact with this phone number already exists:  ${duplicateCheck.phoneDuplicate.name}`,
+                icon: "error",
+                draggable: true
+            });
+            return;
+        }
+        
+        if (duplicateCheck.emailDuplicate) {
+            Swal.fire({
+                title: "Duplicate Email Address",
+                text: `A contact with this email already exists:  ${duplicateCheck.emailDuplicate.name}`,
+                icon: "error",
+                draggable: true
+            });
+            return;
+        }
 
         const file = avatar.files[0];
 
@@ -393,6 +415,29 @@ function GetData(i){
 
 function UpdateContact(){
     if (ValidateContactInput(fullname) && ValidateContactInput(phone)) {
+        
+        const duplicateCheck = checkDuplicate(phone.value, email.value);
+        
+        if (duplicateCheck.phoneDuplicate) {
+            Swal.fire({
+                title: "Phone Number Exists!",
+                text: `This phone number already exists for ${duplicateCheck.phoneDuplicate.name}`,
+                icon: "error",
+                draggable: true
+            });
+            return;
+        }
+        
+        if (duplicateCheck.emailDuplicate) {
+            Swal.fire({
+                title: "Email Exists!",
+                text: `This email already exists for ${duplicateCheck.emailDuplicate.name}`,
+                icon: "error",
+                draggable: true
+            });
+            return;
+        }
+        
         contacts[currentIndex].avatar = avatarPreview.querySelector("img") ? avatarPreview.querySelector("img").src : contacts[currentIndex].avatar ;
         contacts[currentIndex].fullname = fullname.value;
         contacts[currentIndex].phone = phone.value;
@@ -475,7 +520,7 @@ function ClearForm() {
     fav.checked = false;
     eme.checked = false;
     avatarPreview.innerHTML = `<i class="fa-solid fa-user"></i>`;
-        fullname.classList.remove("is-valid", "is-invalid");
+    fullname.classList.remove("is-valid", "is-invalid");
     phone.classList.remove("is-valid", "is-invalid");
     fullname.nextElementSibling.classList.add("d-none");
     phone.nextElementSibling.classList.add("d-none");
@@ -505,4 +550,23 @@ function ValidateContactInput(element) {
         return false;
     }
 
+}
+
+function checkDuplicate(phoneValue, emailValue) {
+    var phoneDuplicate ;
+    var emailDuplicate ;
+    
+    for (var i = 0; i < contacts.length; i++) {
+        if (i === currentIndex) continue;
+        
+        if (phoneValue && contacts[i].phone === phoneValue) {
+            phoneDuplicate = { name: contacts[i].fullname };
+        }
+        
+        if (emailValue && emailValue !== "" && contacts[i].email === emailValue) {
+            emailDuplicate = { name: contacts[i].fullname };
+        }
+    }
+    
+    return { phoneDuplicate: phoneDuplicate, emailDuplicate: emailDuplicate };
 }
