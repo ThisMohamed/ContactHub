@@ -42,7 +42,7 @@ function AddContact() {
                 title: "Duplicate Phone Number",
                 text: `A contact with this phone number already exists:  ${duplicateCheck.phoneDuplicate.name}`,
                 icon: "error",
-                draggable: true
+
             });
             return;
         }
@@ -52,7 +52,7 @@ function AddContact() {
                 title: "Duplicate Email Address",
                 text: `A contact with this email already exists:  ${duplicateCheck.emailDuplicate.name}`,
                 icon: "error",
-                draggable: true
+
             });
             return;
         }
@@ -79,10 +79,11 @@ function AddContact() {
                     title: "Added!",
                     text: "Contact has been added successfully.",
                     icon: "success",
-                    draggable: true
+                    showConfirmButton: false,
+                    timer: 1000,
+
                 });
                 DisplayContacts();
-
                 var modalInstance = bootstrap.Modal.getInstance(modal);
                 if (modalInstance) modalInstance.hide();
                 ClearForm();
@@ -106,7 +107,8 @@ function AddContact() {
                 title: "Added!",
                 text: "Contact has been added successfully.",
                 icon: "success",
-                draggable: true
+                showConfirmButton: false,
+                timer: 1000,
             });
             DisplayContacts();
 
@@ -120,16 +122,14 @@ function AddContact() {
         Swal.fire({
             title: "Missing Name!",
             text: "Please enter a name for the contact!",
-            icon: "error",
-            draggable: true
+            icon: "error"
         });
     }
     else {
         Swal.fire({
             title: "Invalid Name!",
             text: "Name should contain only letters and spaces (2-50 characters)",
-            icon: "error",
-            draggable: true
+            icon: "error"
         });
     }
     
@@ -139,16 +139,14 @@ function AddContact() {
         Swal.fire({
             title: "Missing Phone Number!",
             text: "Please enter a phone number!",
-            icon: "error",
-            draggable: true
+            icon: "error"
         });
     }
     else {
         Swal.fire({
             title: "Invalid Phone Number!",
             text: "Please enter a valid Egyptian phone number (e.g., 01012345678, +201012345678, or 00201012345678)",
-            icon: "error",
-            draggable: true
+            icon: "error"
         });
     }
 
@@ -383,6 +381,7 @@ Swal.fire({
         title: "Deleted!",
         text: "Contact has been deleted..",
         icon: "success",
+        showConfirmButton: false,
         timer: 1000,
     });
         DisplayContacts();
@@ -423,7 +422,7 @@ function UpdateContact(){
                 title: "Phone Number Exists!",
                 text: `This phone number already exists for ${duplicateCheck.phoneDuplicate.name}`,
                 icon: "error",
-                draggable: true
+
             });
             return;
         }
@@ -433,7 +432,7 @@ function UpdateContact(){
                 title: "Email Exists!",
                 text: `This email already exists for ${duplicateCheck.emailDuplicate.name}`,
                 icon: "error",
-                draggable: true
+
             });
             return;
         }
@@ -452,7 +451,8 @@ function UpdateContact(){
             title: "Updated!",
             text: "Contact has been updated successfully.",
             icon: "success",
-            draggable: true
+            showConfirmButton: false,
+            timer: 1000
         });
         DisplayContacts();
         var modalInstance = bootstrap.Modal.getInstance(modal);
@@ -466,14 +466,14 @@ function UpdateContact(){
                 title: "Missing Name!",
                 text: "Please enter a name for the contact!",
                 icon: "error",
-                draggable: true
+
             });
         } else {
             Swal.fire({
                 title: "Invalid Name!",
                 text: "Name should contain only letters and spaces (2-50 characters)",
                 icon: "error",
-                draggable: true
+
             });
         }
     } else if (!ValidateContactInput(phone)) {
@@ -482,14 +482,14 @@ function UpdateContact(){
                 title: "Missing Phone Number!",
                 text: "Please enter a phone number!",
                 icon: "error",
-                draggable: true
+
             });
         } else {
             Swal.fire({
                 title: "Invalid Phone Number!",
                 text: "Please enter a valid Egyptian phone number (e.g., 01012345678, +201012345678, or 00201012345678)",
                 icon: "error",
-                draggable: true
+
             });
         }
     }
