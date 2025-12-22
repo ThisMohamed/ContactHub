@@ -11,6 +11,7 @@ var notes = document.getElementById("contactNotesInput");
 var AllContacts = document.querySelector("#all-contacts");
 var favListGroup = document.querySelector("#fav-list-group");
 var emeListGroup = document.querySelector("#em-list-group");
+let search = document.querySelector('#searchInput')
 var modal = document.getElementById("addContactModal");
 var contacts = JSON.parse(localStorage.getItem("contacts")) || [];
 var FavList = JSON.parse(localStorage.getItem("FavList")) || [];
@@ -220,7 +221,7 @@ function DisplayContacts() {
                                 </li>
         </div>`;
         }
-
+        if (contacts[i].fullname.toLowerCase().includes(search.value.toLowerCase()) || contacts[i].phone.includes(search.value)){
         contact += `   <div class="col">
                                 <div class="inner">
                                     <div class="card mb-3 bg-white d-flex flex-column">
@@ -328,6 +329,7 @@ function DisplayContacts() {
                                     </div>
                                 </div>
                         </div>`;
+                        }
 
         
     }
