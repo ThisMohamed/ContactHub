@@ -344,26 +344,26 @@ function DisplayContacts() {
 
 function deleteContact(i) {
 Swal.fire({
-  title: "Delete Contact?",
-  text: `Are you sure you want to delete ${contacts[i].fullname}? This action cannot be undone.`,
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#d33",
-  cancelButtonColor: "#6b7280",
-  confirmButtonText: "Yes, delete it!"
+    title: "Delete Contact?",
+    text: `Are you sure you want to delete ${contacts[i].fullname}? This action cannot be undone.`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#6b7280",
+    confirmButtonText: "Yes, delete it!"
 }).then((result) => {
-  if (result.isConfirmed) {
+    if (result.isConfirmed) {
     contacts.splice(i, 1);
     localStorage.setItem("contacts", JSON.stringify(contacts));
     Swal.fire({
-      title: "Deleted!",
-      text: "Contact has been deleted..",
-      icon: "success",
-      timer: 1000,
+        title: "Deleted!",
+        text: "Contact has been deleted..",
+        icon: "success",
+        timer: 1000,
     });
         DisplayContacts();
 
-  }
+}
 });
     DisplayContacts();
 
@@ -499,4 +499,4 @@ function ValidateContactInput(element) {
         return false;
     }
 
-    }
+}
