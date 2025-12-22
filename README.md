@@ -699,14 +699,6 @@ in the Software without restriction...
 
 ---
 
-## 📊 Project Stats
-
-![GitHub stars](https://img.shields.io/github/stars/ThisMohamed/ContactApp?style=social)
-![GitHub forks](https://img.shields.io/github/forks/ThisMohamed/ContactApp?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/ThisMohamed/ContactApp?style=social)
-
----
-
 <div align="center">
 
 **Made with ❤️ by [Mohamed Ahmed]**
