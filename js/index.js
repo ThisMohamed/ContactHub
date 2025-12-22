@@ -303,6 +303,9 @@ function deleteContact(i) {
 function GetData(i){
 
     currentIndex = i;
+    avatarPreview.innerHTML = contacts[i].avatar 
+        ? `<img src="${contacts[i].avatar}" class="w-100 h-100 object-fit-cover rounded-circle" alt="Avatar Preview">`
+        : Icon(contacts[i].fullname);
     fullname.value = contacts[i].fullname;
     phone.value = contacts[i].phone;
     email.value = contacts[i].email;
@@ -317,6 +320,7 @@ function GetData(i){
 }
 
 function UpdateContact(){
+    contacts[currentIndex].avatar = avatarPreview.querySelector("img").src
     contacts[currentIndex].fullname = fullname.value;
     contacts[currentIndex].phone = phone.value;
     contacts[currentIndex].email = email.value;
