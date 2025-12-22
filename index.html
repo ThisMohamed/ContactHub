@@ -204,22 +204,23 @@
                             <div class="col-12">
                                 <label for="fNameInput" class="form-label fw-medium mt-1">Full Name <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control " id="fNameInput" placeholder="Enter full name">
-                                <p id="contactNameError" class="d-none mt-1 mb-0">Name should contain only
+                                <input type="text" oninput="ValidateContactInput(this)" class="form-control " id="fNameInput" placeholder="Enter full name">
+
+                                <p id="invalidName" class="d-none mt-1 mb-0">Name should contain only
                                     letters and spaces (2-50 characters)</p>
                             </div>
                             <div class="col-12">
                                 <label for="phoneInput" class="form-label fw-medium mt-1">Phone Number <span
                                         class="text-danger">*</span></label>
-                                <input type="tel" class="form-control" id="phoneInput" placeholder="e.g., 01060671290">
-                                <p id="contactPhoneError" class="d-none mt-1 mb-0">Please enter a valid
+                                <input type="tel"oninput="ValidateContactInput(this)"  class="form-control" id="phoneInput" placeholder="e.g., 01060671290">
+                                <p id="invalidPhone" class="d-none mt-1 mb-0">Please enter a valid
                                     Egyptian phone number</p>
                             </div>
 
                             <div class="col-12">
                                 <label for="emailInput" class="form-label fw-medium mt-1">Email Address</label>
-                                <input type="email" class="form-control" id="emailInput" placeholder="name@example.com">
-                                <p id="contactEmailError" class="d-none mt-1 mb-0">Please enter a valid
+                                <input type="email" oninput="ValidateContactInput(this)" class="form-control" id="emailInput" placeholder="name@example.com">
+                                <p id="invalidEmail" class="d-none mt-1 mb-0">Please enter a valid
                                     email address</p>
                             </div>
 
@@ -280,7 +281,7 @@
         </div>
     </section>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/index.js"></script>
 </body>

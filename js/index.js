@@ -32,7 +32,10 @@ function getBase64(file, callback) {
 }
 
 function AddContact() {
-    const file = avatar.files[0];
+
+
+
+const file = avatar.files[0];
 
     if (file) {
     getBase64(file, function (result) {
@@ -50,6 +53,12 @@ function AddContact() {
 
     contacts.push(Contact);
     localStorage.setItem("contacts", JSON.stringify(contacts));
+    Swal.fire({
+    title: "Added!",
+    text: "Contact has been added successfully.",
+    icon: "success",
+    draggable: true
+    });
     DisplayContacts();
 
     var modalInstance = bootstrap.Modal.getInstance(modal);
@@ -71,6 +80,12 @@ function AddContact() {
 
     contacts.push(Contact);
     localStorage.setItem("contacts", JSON.stringify(contacts));
+    Swal.fire({
+    title: "Added!",
+    text: "Contact has been added successfully.",
+    icon: "success",
+    draggable: true
+    });
     DisplayContacts();
 
     var modalInstance = bootstrap.Modal.getInstance(modal);
@@ -78,7 +93,9 @@ function AddContact() {
 
     ClearForm();
     }
-}
+    }
+    
+
 
 
 function Icon(fullName) {
@@ -292,8 +309,28 @@ function DisplayContacts() {
 
 
 function deleteContact(i) {
+Swal.fire({
+  title: "Delete Contact?",
+  text: `Are you sure you want to delete ${contacts[i].fullname}? This action cannot be undone.`,
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#d33",
+  cancelButtonColor: "#6b7280",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) {
     contacts.splice(i, 1);
     localStorage.setItem("contacts", JSON.stringify(contacts));
+    Swal.fire({
+      title: "Deleted!",
+      text: "Contact has been deleted..",
+      icon: "success",
+      timer: 1000,
+    });
+        DisplayContacts();
+
+  }
+});
     DisplayContacts();
 
 }
@@ -364,3 +401,28 @@ function ClearForm() {
     avatarPreview.innerHTML = `<i class="fa-solid fa-user"></i>`;
 }
 
+
+
+function ValidateContactInput(element) {
+
+    
+    var regex = {
+        fNameInput : /^[a-zA-Z\u0621-\u064A\s]{2,50}$/,
+        phoneInput : /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/,
+        emailInput : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+    };
+
+    if (regex[element.id].test(element.value)==true) {
+        element.nextElementSibling.classList.add("d-none");
+        element.classList.add("is-valid");
+        element.classList.remove("is-invalid");
+        
+    }
+    else {
+        console.log("element.nextElementSibling:", element.nextElementSibling);
+        element.nextElementSibling.classList.remove("d-none");
+        element.classList.remove("is-valid");
+        element.classList.add("is-invalid");
+    }
+
+    }
