@@ -12,7 +12,7 @@
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-[Live Demo](https://thismohamed.github.io/ContactApp/)
+[Live Demo](https://thismohamed.github.io/ContactHub/)
 
 </div>
 
@@ -693,8 +693,9 @@ in the Software without restriction...
 
 ## 📞 Contact & Support
 
-- **Project Link**: [https://github.com/ThisMohamed/ContactApp](https://github.com/ThisMohamed/ContactApp)
-- **Report Issues**: [GitHub Issues](https://github.com/ThisMohamed/contacthub/issues)
+- **Project Link**: [https://github.com/ThisMohamed/ContactHub](https://github.com/ThisMohamed/ContactHub)
+- **Report Issues**: [GitHub Issues](https://github.com/ThisMohamed/ContactHub/issues)
+- **LinkedIn**: [https://www.linkedin.com/in/m77md/](https://www.linkedin.com/in/m77md/)
 - **Email**: m77md.107@gmail.com
 
 ---
