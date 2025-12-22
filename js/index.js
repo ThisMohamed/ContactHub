@@ -32,72 +32,106 @@ function getBase64(file, callback) {
 }
 
 function AddContact() {
+    if (ValidateContactInput(fullname) && ValidateContactInput(phone) ) {
 
+        const file = avatar.files[0];
 
+        if (file) {
+            getBase64(file, function (result) {
+                var Contact = {
+                    avatar: result,
+                    fullname: fullname.value,
+                    phone: phone.value,
+                    email: email.value,
+                    group: group.value,
+                    address: address.value,
+                    notes: notes.value,
+                    fav: fav.checked,
+                    eme: eme.checked,
+                };
 
-const file = avatar.files[0];
+                contacts.push(Contact);
+                localStorage.setItem("contacts", JSON.stringify(contacts));
+                Swal.fire({
+                    title: "Added!",
+                    text: "Contact has been added successfully.",
+                    icon: "success",
+                    draggable: true
+                });
+                DisplayContacts();
 
-    if (file) {
-    getBase64(file, function (result) {
-    var Contact = {
-        avatar: result,
-        fullname: fullname.value,
-        phone: phone.value,
-        email: email.value,
-        group: group.value,
-        address: address.value,
-        notes: notes.value,
-        fav: fav.checked,
-        eme: eme.checked,
-    };
+                var modalInstance = bootstrap.Modal.getInstance(modal);
+                if (modalInstance) modalInstance.hide();
+                ClearForm();
+            });
+        } else {
+            var Contact = {
+                avatar: "",
+                fullname: fullname.value,
+                phone: phone.value,
+                email: email.value,
+                group: group.value,
+                address: address.value,
+                notes: notes.value,
+                fav: fav.checked,
+                eme: eme.checked,
+            };
 
-    contacts.push(Contact);
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-    Swal.fire({
-    title: "Added!",
-    text: "Contact has been added successfully.",
-    icon: "success",
-    draggable: true
-    });
-    DisplayContacts();
+            contacts.push(Contact);
+            localStorage.setItem("contacts", JSON.stringify(contacts));
+            Swal.fire({
+                title: "Added!",
+                text: "Contact has been added successfully.",
+                icon: "success",
+                draggable: true
+            });
+            DisplayContacts();
 
-    var modalInstance = bootstrap.Modal.getInstance(modal);
-    if (modalInstance) modalInstance.hide();
-        ClearForm();
-    });
-    } else {
-    var Contact = {
-        avatar: "",
-        fullname: fullname.value,
-        phone: phone.value,
-        email: email.value,
-        group: group.value,
-        address: address.value,
-        notes: notes.value,
-        fav: fav.checked,
-        eme: eme.checked,
-    };
+            var modalInstance = bootstrap.Modal.getInstance(modal);
+            if (modalInstance) modalInstance.hide();
+            ClearForm();
+        }
 
-    contacts.push(Contact);
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-    Swal.fire({
-    title: "Added!",
-    text: "Contact has been added successfully.",
-    icon: "success",
-    draggable: true
-    });
-    DisplayContacts();
-
-    var modalInstance = bootstrap.Modal.getInstance(modal);
-    if (modalInstance) modalInstance.hide();
-
-    ClearForm();
+    } else if (!ValidateContactInput(fullname)) {
+        if (fullname.value == "") {
+        Swal.fire({
+            title: "Missing Name!",
+            text: "Please enter a name for the contact!",
+            icon: "error",
+            draggable: true
+        });
     }
+    else {
+        Swal.fire({
+            title: "Invalid Name!",
+            text: "Name should contain only letters and spaces (2-50 characters)",
+            icon: "error",
+            draggable: true
+        });
     }
     
+}
+    else if (!ValidateContactInput(phone)) {
+        if (phone.value == "") {
+        Swal.fire({
+            title: "Missing Phone Number!",
+            text: "Please enter a phone number!",
+            icon: "error",
+            draggable: true
+        });
+    }
+    else {
+        Swal.fire({
+            title: "Invalid Phone Number!",
+            text: "Please enter a valid Egyptian phone number (e.g., 01012345678 or +201012345678)",
+            icon: "error",
+            draggable: true
+        });
+    }
 
+}
 
-
+}
 function Icon(fullName) {
     var names = fullName.split(" ");
     var first_letter = names[0][0] + (names[1] ? names[1][0] : "");
@@ -222,14 +256,14 @@ function DisplayContacts() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="contact-email d-flex align-items-center gap-2 mt-1">
+                                            <div class="contact-email d-flex align-items-center gap-2 mt-1 ${contacts[i].email == "" ? "d-none" : ""}">
                                                 <div
                                                     class="icon bg-blue-100 d-flex align-items-center justify-content-center flex-shrink-0">
                                                     <i class="fa fa-envelope"></i>
                                                 </div>
                                                 <span class="">${contacts[i].email}</span>
                                             </div>
-                                            <div class="contact-address d-flex align-items-center gap-2 mt-1">
+                                            <div class="contact-address d-flex align-items-center gap-2 mt-1 ${contacts[i].address == "" ? "d-none" : ""}">
                                                 <div
                                                     class="icon bg-blue-100 d-flex align-items-center justify-content-center flex-shrink-0">
                                                     <i class="fa fa-location-dot"></i>
@@ -240,7 +274,7 @@ function DisplayContacts() {
                                                 <span
                                                     class="${contacts[i].group == ""? "d-none": " "} card-badge ${contacts[i].group}-badge d-inline-flex align-items-center fw-medium">${contacts[i].group }</span>
                                                 <span
-                                                    class="card-badge em-badge d-inline-flex align-items-center fw-medium ${contacts[i].emCheck? "": "d-none"}"><i
+                                                    class="card-badge em-badge d-inline-flex align-items-center fw-medium ${contacts[i].eme? "": "d-none"}"><i
                                                         class="fa-solid fa-heart-pulse me-1"></i>emergency</span>
                                             </div>
                                         </div>
@@ -409,19 +443,20 @@ function ValidateContactInput(element) {
     var regex = {
         fNameInput : /^[a-zA-Z\u0621-\u064A\s]{2,50}$/,
         phoneInput : /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/,
-        emailInput : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
     };
 
     if (regex[element.id].test(element.value)==true) {
         element.nextElementSibling.classList.add("d-none");
         element.classList.add("is-valid");
         element.classList.remove("is-invalid");
+        return true;
         
     }
     else {
         element.nextElementSibling.classList.remove("d-none");
         element.classList.remove("is-valid");
         element.classList.add("is-invalid");
+        return false;
     }
 
     }
