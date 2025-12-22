@@ -22,17 +22,12 @@
 
 - [Overview](#-overview)
 - [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
 - [Getting Started](#-getting-started)
 - [Project Structure](#-project-structure)
 - [Data Management](#-data-management)
-- [State Management Pattern](#-state-management-pattern)
 - [API Reference](#-api-reference)
 - [Browser Support](#-browser-support)
 - [Performance](#-performance)
-- [Contributing](#-contributing)
-- [Roadmap](#-roadmap)
 - [License](#-license)
 - [Acknowledgments](#-acknowledgments)
 
@@ -575,29 +570,6 @@ Lighthouse Score: 90+
 Bundle Size: ~150KB (total)
 ```
 
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-### How to Contribute
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/AmazingFeature
-   ```
-3. **Commit your changes**
-   ```bash
-   git commit -m 'Add some AmazingFeature'
-   ```
-4. **Push to the branch**
-   ```bash
-   git push origin feature/AmazingFeature
-   ```
-5. **Open a Pull Request**
-
 ### Development Guidelines
 
 - Follow existing code style and conventions
@@ -721,23 +693,23 @@ in the Software without restriction...
 
 ## 📞 Contact & Support
 
-- **Project Link**: [https://github.com/yourusername/contacthub](https://github.com/yourusername/contacthub)
-- **Report Issues**: [GitHub Issues](https://github.com/yourusername/contacthub/issues)
-- **Email**: your.email@example.com
+- **Project Link**: [https://github.com/ThisMohamed/ContactApp](https://github.com/ThisMohamed/ContactApp)
+- **Report Issues**: [GitHub Issues](https://github.com/ThisMohamed/contacthub/issues)
+- **Email**: m77md.107@gmail.com
 
 ---
 
 ## 📊 Project Stats
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/contacthub?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/contacthub?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/yourusername/contacthub?style=social)
+![GitHub stars](https://img.shields.io/github/stars/ThisMohamed/ContactApp?style=social)
+![GitHub forks](https://img.shields.io/github/forks/ThisMohamed/ContactApp?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/ThisMohamed/ContactApp?style=social)
 
 ---
 
 <div align="center">
 
-**Made with ❤️ by [Your Name]**
+**Made with ❤️ by [Mohamed Ahmed]**
 
 ⭐ Star this repo if you find it helpful!
 

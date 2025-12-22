@@ -221,7 +221,7 @@ function DisplayContacts() {
                                 </li>
         </div>`;
         }
-        if (contacts[i].fullname.toLowerCase().includes(search.value.toLowerCase()) || contacts[i].phone.includes(search.value)){
+        if ((contacts[i].fullname.toLowerCase().includes(search.value.toLowerCase())||"") || (contacts[i].phone.includes(search.value)||"")){
         contact += `   <div class="col">
                                 <div class="inner">
                                     <div class="card mb-3 bg-white d-flex flex-column">
