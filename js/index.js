@@ -533,7 +533,7 @@ function ValidateContactInput(element) {
     
     var regex = {
         fNameInput : /^[a-zA-Z\u0621-\u064A\s]{2,50}$/,
-        phoneInput : /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/,
+        phoneInput : /^(\+201|01|00201)[0125][0-9]{8}$/,
     };
 
     if (regex[element.id].test(element.value)==true) {
