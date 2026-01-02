@@ -33,7 +33,7 @@ function getBase64(file, callback) {
 }
 
 function AddContact() {
-    if (ValidateContactInput(fullname) && ValidateContactInput(phone) ) {
+    if (ValidateContactInput(fullname) && ValidateContactInput(phone) ) { 
         
         const duplicateCheck = checkDuplicate(phone.value, email.value);
         
@@ -153,6 +153,7 @@ function AddContact() {
 }
 
 }
+
 function Icon(fullName) {
     var names = fullName.split(" ");
     var first_letter = names[0][0] + (names[1] ? names[1][0] : "");
@@ -559,11 +560,11 @@ function checkDuplicate(phoneValue, emailValue) {
     for (var i = 0; i < contacts.length; i++) {
         if (i === currentIndex) continue;
         
-        if (phoneValue && contacts[i].phone === phoneValue) {
+        if (contacts[i].phone === phoneValue) {
             phoneDuplicate = { name: contacts[i].fullname };
         }
         
-        if (emailValue && emailValue !== "" && contacts[i].email === emailValue) {
+        if ( contacts[i].email === emailValue) {
             emailDuplicate = { name: contacts[i].fullname };
         }
     }
