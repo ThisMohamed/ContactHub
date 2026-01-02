@@ -558,13 +558,12 @@ function checkDuplicate(phoneValue, emailValue) {
     var emailDuplicate ;
     
     for (var i = 0; i < contacts.length; i++) {
-        if (i === currentIndex) continue;
-        
+    
         if (contacts[i].phone === phoneValue) {
             phoneDuplicate = { name: contacts[i].fullname };
         }
         
-        if ( contacts[i].email === emailValue) {
+        if (emailValue !== "" && contacts[i].email === emailValue) {
             emailDuplicate = { name: contacts[i].fullname };
         }
     }
